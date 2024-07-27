@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    //inOrder of BST is always sorted
+    ArrayList<Integer> arrayList;
+
+    public void inOrderHelper(TreeNode root, int k) {
+        if(root != null){
+            inOrderHelper(root.left, k);
+            this.arrayList.add(root.val);
+            inOrderHelper(root.right, k);
+        }
+    }
+
+    public int kthSmallest(TreeNode root, int k) {
+        this.arrayList = new ArrayList<Integer>();
+        this.inOrderHelper(root, k);
+        return this.arrayList.get(k - 1);
+    }
+}
